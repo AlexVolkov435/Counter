@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _text;
-
     [SerializeField] private float _pause;
-
     [SerializeField] private int _startValue;
+    [SerializeField] private Rendering _rendering;
 
     private int _countCliked = 0;
 
@@ -17,7 +15,7 @@ public class Counter : MonoBehaviour
         TaskOnClick();
 
         StartCoroutine(Countdown(_pause, _startValue));
-        _startValue = int.Parse(_text.text);
+        _startValue = _rendering.SaveValue();
     }
 
     private void TaskOnClick()
@@ -36,14 +34,9 @@ public class Counter : MonoBehaviour
                 yield break;
             }
 
-            DisplayCountdown(i);
+            _rendering.DisplayCountdown(i);
 
             yield return wait;
         }
-    }
-
-    private void DisplayCountdown(float count)
-    {
-        _text.text = count.ToString("");
     }
 }
