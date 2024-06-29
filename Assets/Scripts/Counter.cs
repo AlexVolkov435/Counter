@@ -1,21 +1,30 @@
+using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
     [SerializeField] private float _pause;
-    [SerializeField] private int _startValue;
-    [SerializeField] private Rendering _rendering;
 
     private int _countCliked = 0;
+    private bool _isSecondClick = false;
+    private int _counter = 0;
+
+    public event Action<float> Changen;
 
     public void StartCounter()
     {
         TaskOnClick();
 
-        StartCoroutine(Countdown(_pause, _startValue));
-        _startValue = _rendering.SaveValue();
+        if (_countCliked % 2 == 0)
+        {
+            _isSecondClick = true;
+        }
+        else
+        {
+            _isSecondClick = false;
+            StartCoroutine(Countdown(_pause));
+        }
     }
 
     private void TaskOnClick()
@@ -23,18 +32,21 @@ public class Counter : MonoBehaviour
         _countCliked++;
     }
 
-    private IEnumerator Countdown(float delay, int _startValue)
+    private IEnumerator Countdown(float delay)
     {
+        bool isPlayCounter = true;
+
         var wait = new WaitForSeconds(delay);
 
-        for (int i = _startValue; i <= 10; i++)
+        while (isPlayCounter)
         {
-            if (_countCliked % 2 == 0)
+            if (_isSecondClick == true)
             {
                 yield break;
             }
 
-            _rendering.DisplayCountdown(i);
+            Changen?.Invoke(_counter);
+            _counter++;
 
             yield return wait;
         }

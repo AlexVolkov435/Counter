@@ -175,8 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pause: 0.5
-  _startValue: 0
-  _rendering: {fileID: 1580365163}
 --- !u!114 &691101771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1580365161}
+  _counter: {fileID: 691101770}
 --- !u!1 &1765852109
 GameObject:
   m_ObjectHideFlags: 0
