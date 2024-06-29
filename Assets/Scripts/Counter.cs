@@ -10,7 +10,7 @@ public class Counter : MonoBehaviour
     private bool _isSecondClick = false;
     private int _counter = 0;
 
-    public event Action<float> Changen;
+    public event Action<float> TextChangen;
 
     public void StartCounter()
     {
@@ -45,7 +45,7 @@ public class Counter : MonoBehaviour
                 yield break;
             }
 
-            Changen?.Invoke(_counter);
+            TextChangen?.Invoke(_counter);
             _counter++;
 
             yield return wait;

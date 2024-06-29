@@ -8,12 +8,12 @@ public class Rendering : MonoBehaviour
 
     private void OnEnable()
     {
-        _counter.Changen += DisplayCountdown;
+        _counter.TextChangen += DisplayCountdown;
     }
 
     private void OnDisable()
     {
-        _counter.Changen -= DisplayCountdown;
+        _counter.TextChangen -= DisplayCountdown;
     }
 
     public void DisplayCountdown(float count)
